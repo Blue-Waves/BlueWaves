@@ -8,7 +8,7 @@ from listing.models import Listing
 
 def index(request):
     listings = Listing.objects.order_by(
-        '-list_date').filter(is_published=True)[:3]
+        '-list_date').filter(is_published=True)
     # post = get_object_or_404(Listing, pk=px)
     # fav = bool
     # if post.favourites.filter(id=request.user.id).exists():

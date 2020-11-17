@@ -1,7 +1,7 @@
 from django.db import models
 from datetime import datetime
 from Core.models import User
-from .modelchoices import category_choices, city_choices
+from .choices import category_choices, city_choices
 
 
 class Listing(models.Model):

@@ -2,161 +2,189 @@
 {% load humanize %}
 {% block tiltle %} Listings {% endblock %}
 {% block content %}
-<section id="showcase-inner" class="showcase-search text-white py-5">
+<!-- Advance Search -->
+<div class="advance-search">
     <div class="container">
-        <div class="row text-center">
-            <div class="col-md-12">
+        <div class="row justify-content-center">
+            <div class="col-lg-12 col-md-12 align-content-center">
                 <form action="{% url 'search' %}">
-                    <!-- Form Row 1 -->
                     <div class="form-row">
-                        <div class="col-md-4 mb-3">
-                            <label class="sr-only">Search</label>
-                            <input type="text" name="keywords" class="form-control"
-                                placeholder="Search (Electronics, Gadgets, books)">
+                        <div class="form-group col-md-9">
+                            <input type="text" name="keywords" class="form-control my-2 my-lg-1" id="inputtext4"
+                                placeholder="What are you looking for?">
                         </div>
 
-
-
-                        <div class="col-md-4 mb-3">
-                            <label class="sr-only">City</label>
-                            <select name="city" class="form-control">
-                                <option selected="true" disabled="disabled">City (All)</option>
-                                {% for key,value in city_choices.items %}
-                                <option value="{{key}}" {% if key == values.city %} selected {% endif %}>{{value}}
-                                </option>
-                                {%endfor%}
-
-                            </select>
+                        <div class="form-group col-md-2 align-self-center">
+                            <button type="submit" class="btn btn-primary">Search Now</button>
                         </div>
                     </div>
-                    <!-- Form Row 2 -->
-                    <div class="form-row">
-                        <div class="col-md-6 mb-3">
-                            <label class="sr-only">Category</label>
-                            <select name="category" class="form-control">
-                                <option selected="true" disabled="disabled">Category (All)</option>
-                                {% for key,value in category_choices.items %}
-                                <option value="{{key}}" {% if key == values.category %} selected {% endif %}>{{value}}
-                                </option>
-                                {%endfor%}
-                            </select>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <select name="price" class="form-control">
-                                <option selected="true" disabled="disabled">Max Price (All)</option>
-                                {% for key,value in price_choices.items %}
-                                <option value="{{key}}" {% if key == values.price %} selected {% endif %}>{{value}}
-                                </option>
-                                {%endfor%}
 
-                            </select>
-                        </div>
-                    </div>
-                    <button class="btn btn-secondary btn-block mt-4" type="submit">Submit form</button>
                 </form>
             </div>
         </div>
     </div>
-</section>
+</div>
 
-<!-- Breadcrumb -->
-<section id="bc" class="mt-3">
-    <div class="container">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a href="{% url 'index' %}">
-                        <i class="fas fa-home"></i> Home</a>
-                </li>
-                <li class="breadcrumb-item">
-                    <a href="{% url 'listings' %}">Browse Listings</a>
-                </li>
-                <li class="breadcrumb-item active"> Search Results</li>
-            </ol>
-        </nav>
-    </div>
-</section>
+<!-- Container End -->
 
-<!-- Listings -->
-<section id="listings" class="py-4">
+{% if query_set %}
+<section class="section-sm">
     <div class="container">
         <div class="row">
-
-            <!-- Listing 1 -->
-            {% if query_set %}
-            {% for listing in query_set %}
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card listing-preview">
-                    <img class="card-img-top" src="{{ listing.photo_main.url }}" alt="">
-                    <div class="card-img-overlay">
-                        <h2>
-                            <span class="badge badge-secondary text-white">₹ {{ listing.price | intcomma }}</span>
-                        </h2>
-                    </div>
-                    <div class="card-body">
-                        <div class="listing-heading text-center">
-                            <h4 class="text-primary">{{listing.title}}</h4>
-                            <p>
-                                <i class="fas fa-map-marker text-secondary"></i> {{listing.city}} </p>
-                        </div>
-                        <hr>
-                        <div class="row py-2 text-secondary">
-                            <div class="col-8">
-                                <i class="fas fa-th-large"></i> Category:{{listing.category}}
-                            </div>
-                        </div>
-                        <div class="row py-2 text-secondary">
-                            <div class="col-8">
-                                <i class="fas fa-user"></i> Owner:{{listing.owner.full_name}}
-                            </div>
-                        </div>
-                        <div class="row py-2 text-secondary">
-                            <div class="col-8">
-                                <i class="fas fa-phone"></i> Phone:{{listing.owner.phone}}
-                            </div>
-                        </div>
-                        <div class="row py-2 text-secondary">
-                            <div class="col-10">
-                                <i class="fas fa-envelope"></i> Email:{{listing.owner.email}}
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row text-secondary pb-2">
-                        <div class="col-6">
-                            <i class="fas fa-clock"></i> {{listing.list_date | timesince }}</div>
-                    </div>
-                    {% if request.user.is_authenticated %}
-                    {% if fav %}
-
-                    <div class="row text-secondary pb-2">
-                        <div class="col-10">
-                            <a href="{% url 'add_favourite' listing.id %}">Remove
-                                favorites</a> </div>
-                    </div>
-                    {% else %}
-
-                    <div class="row text-secondary pb-2">
-                        <div class="col-10">
-                            <a href="{% url 'add_favourite' listing.id %}">Add to
-                                favorites</a> </div>
-                    </div>
-                    {% endif %}
-                    {% endif %}
-                    <hr>
-                    <a href="{% url 'listing' listing.id %}" class="btn btn-primary btn-block">More Info</a>
+            <div class="col-md-12">
+                <div class="search-result bg-gray">
+                    <h2>Results For "{{query}}"</h2>
+                    <p>123 Results on 12 December, 2017</p>
                 </div>
             </div>
-            {% endfor %}
-            {% else %}
-            <div class="col-md-12">
-                <p>Currently there are no listings Available</p>
-            </div>
-            {%endif%}
         </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="category-sidebar">
+                    <div class="widget category-list">
+                        <h4 class="widget-header">All Category</h4>
+                        <ul class="category-list">
+                            <li><a href="{% url 'category_listings' 'Electronics'%}">Electronics
+                                    <span>93</span></a></li>
+                            <li><a href="{% url 'category_listings' 'Vehicels'%}">Vehicles <span>233</span></a></li>
+                            <li><a href="{% url 'category_listings' 'Clothes'%}">Clothes <span>183</span></a></li>
+                            <li><a href="{% url 'category_listings' 'Books'%}">Books <span>343</span></a></li>
+                        </ul>
+                    </div>
 
-    </div>
-    </div>
+                    <div class="widget category-list">
+                        <h4 class="widget-header">Nearby</h4>
+                        <ul class="category-list">
+                            <li><a href="{% url 'city_listings' 'Lefkosa' %}">Lefkosa <span>93</span></a></li>
+                            <li><a href="{% url 'city_listings' 'Girne' %}">Girne <span>233</span></a></li>
+                            <li><a href="{% url 'city_listings' 'Magusa' %}">Magusa <span>183</span></a></li>
+                            <li><a href="{% url 'city_listings' 'Lefke' %}">Lefke <span>120</span></a></li>
+                            <li><a href="{% url 'city_listings' 'Guzelyurt' %}">Guzelyurt <span>40</span></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="widget filter">
+                        <h4 class="widget-header">Show Produts</h4>
+                        <select>
+                            <option>Popularity</option>
+                            <option value="1">Top rated</option>
+                            <option value="2">Lowest Price</option>
+                            <option value="4">Highest Price</option>
+                        </select>
+                    </div>
+
+                    <div class="widget price-range w-100">
+                        <h4 class="widget-header">Price Range</h4>
+                        <div class="block">
+                            <input class="range-track w-100" type="text" data-slider-min="0" data-slider-max="5000"
+                                data-slider-step="5" data-slider-value="[0,5000]">
+                            <div class="d-flex justify-content-between mt-2">
+                                <span class="value">$10 - $5000</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="category-search-filter">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <strong>Sort</strong>
+                            <select>
+                                <option>Most Recent</option>
+                                <option value="1">Most Popular</option>
+                                <option value="2">Lowest Price</option>
+                                <option value="4">Highest Price</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="view">
+                                <strong>Views</strong>
+                                <ul class="list-inline view-switcher">
+                                    <li class="list-inline-item">
+                                        <a href="#" onclick="event.preventDefault();" class="text-info"><i
+                                                class="fa fa-th-large"></i></a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="ad-list-view.html"><i class="fa fa-reorder"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-grid-list">
+                    <div class="row mt-30">
+
+                        {% for listing in query_set %}
+                        <div class="col-sm-12 col-lg-4 col-md-6">
+                            <!-- product card -->
+                            <div class="product-item bg-light">
+                                <div class="card">
+                                    <div class="thumb-content">
+                                        <div class="price">${{listing.price}}</div>
+                                        <a href="{% url 'listing' listing.id %}">
+                                            <img class="card-img-top img-fluid" src="{{ listing.photo_main.url }}"
+                                                alt="Card image cap" style="height: 200px;">
+                                        </a>
+                                    </div>
+                                    <div class="card-body">
+                                        <h4 class="card-title"><a
+                                                href="{% url 'listing' listing.id %}">{{listing.title}}</a>
+                                        </h4>
+                                        <ul class="list-inline product-meta">
+                                            <li class="list-inline-item">
+                                                <a href="{% url 'listing' listing.id %}"><i
+                                                        class="fa fa-folder-open-o"></i>{{listing.category}}</a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a href="#"><i class="fa fa-calendar"></i>{{listing.list_date}}</a>
+                                            </li>
+                                        </ul>
+                                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                            Explicabo, aliquam!</p>
+                                        <div class="product-ratings">
+                                            <ul class="list-inline">
+                                                <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <section class="section-sm">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="search-result bg-gray">
+                                            <h2>No results found for "{{query}}"</h2>
+
+
+
+                                            {%endif%}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
 </section>
+
+
 {% endblock %}
 © 2020 GitHub, Inc.

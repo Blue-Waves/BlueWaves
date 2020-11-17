@@ -1,141 +1,183 @@
 {% extends 'base.html' %}
+{% load static  %}
 {% load humanize %}
 {% block title %} Home{% endblock %}
 {% block content %}
-<section id="showcase">
-    <div class="container text-center">
-        <div class="home-search p-5">
-            <div class="overlay p-5">
-                {% include 'partials/_alerts.html' %}
-                <h1 class="display-4 mb-4">
-                    Buy and Sell Items Online
-                </h1>
-                <p class="lead">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae quas, asperiores
-                    eveniet vel nostrum magnam
-                    voluptatum tempore! Consectetur, id commodi!</p>
-                <div class="search">
-                    <form action="{% url 'search' %}">
-                        <!-- Form Row 1 -->
-                        <div class="form-row">
-                            <div class="col-md-4 mb-3">
-                                <label class="sr-only">Search</label>
-                                <input type="text" name="keywords" class="form-control"
-                                    placeholder="Search (Electronics, Gadgets, books)">
-                            </div>
 
-                            <div class="col-md-4 mb-3">
-                                <label class="sr-only">city</label>
-                                <select name="city" class="form-control">
-                                    <option selected="true" disabled="disabled">city (All)</option>
-                                    {% for key,value in city_choices.items %}
-                                    <option value="{{key}}" {% if key == values.city %} selected {% endif %}>{{value}}
-                                    </option>
-                                    {%endfor%}
 
-                                </select>
-                            </div>
-                        </div>
-                        <!-- Form Row 2 -->
-                        <div class="form-row">
-                            <div class="col-md-6 mb-3">
-                                <label class="sr-only">Category</label>
-                                <select name="category" class="form-control">
-                                    <option selected="true" disabled="disabled">Category (All)</option>
-                                    {% for key,value in category_choices.items %}
-                                    <option value="{{key}}" {% if key == values.category %} selected {% endif %}>
-                                        {{value}}</option>
-                                    {%endfor%}
-                                </select>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <select name="price" class="form-control">
-                                    <option selected="true" disabled="disabled">Max Price (All)</option>
-                                    {% for key,value in price_choices.items %}
-                                    <option value="{{key}}" {% if key == values.price %} selected {% endif %}>{{value}}
-                                    </option>
-                                    {%endfor%}
+<!--===============================
+=            Hero Area            =
+================================-->
 
-                                </select>
-                            </div>
-                        </div>
-                        <button class="btn btn-secondary btn-block mt-4" type="submit">Submit form</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Listings -->
-<section id="listings" class="py-5">
+<section class="hero-area bg-1 text-center overly">
+    {% include 'partials/_alerts.html'%}
+    <!-- Container Start -->
     <div class="container">
-        <h3 class="text-center mb-3">Latest Listings</h3>
         <div class="row">
-            {% if listings %}
-            {% for listing in listings %}
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card listing-preview">
-                    <img class="card-img-top" src="{{ listing.photo_main.url }}" alt="" height="200px">
-                    <div class="card-img-overlay">
-                        <h2>
-                            <span class="badge badge-secondary text-white">₹ {{ listing.price | intcomma }}</span>
-                        </h2>
+            <div class="col-md-12">
+                <!-- Header Contetnt -->
+                <div class="content-block">
+                    <h1>Buy & Sell Near You </h1>
+                    <p>Join the millions who buy and sell from each other <br> everyday in local communities around the
+                        world</p>
+                    <div class="short-popular-category-list text-center">
+                        <h2>Popular Category</h2>
+                        <ul class="list-inline">
+                            <li class="list-inline-item">
+                                <a href="category.html"><i class="fa fa-bed"></i> Hotel</a></li>
+                            <li class="list-inline-item">
+                                <a href="category.html"><i class="fa fa-grav"></i> Fitness</a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="category.html"><i class="fa fa-car"></i> Cars</a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="category.html"><i class="fa fa-cutlery"></i> Restaurants</a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="category.html"><i class="fa fa-coffee"></i> Cafe</a>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="card-body">
-                        <div class="listing-heading text-center">
-                            <h4 class="text-primary">{{listing.title}}</h4>
-                            <p>
-                                <i class="fas fa-map-marker text-secondary"></i> {{listing.city}} {{listing.city}},
-                                {{listing.zipcode}}</p>
-                        </div>
-                        <hr>
-                        <div class="row py-2 text-secondary">
-                            <div class="col-8">
-                                <i class="fas fa-th-large"></i> Category:{{listing.category}}
-                            </div>
-                        </div>
-                        <div class="row py-2 text-secondary">
-                            <div class="col-8">
-                                <i class="fas fa-user"></i> Owner:{{listing.owner.first_name}}
-                            </div>
-                        </div>
-                        <div class="row py-2 text-secondary">
-                            <div class="col-8">
-                                <i class="fas fa-phone"></i> Phone:{{listing.owner.phone}}
-                            </div>
-                        </div>
-                        <div class="row py-2 text-secondary">
-                            <div class="col-10">
-                                <i class="fas fa-envelope"></i> Email:{{listing.owner.email}}
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row text-secondary pb-2">
-                        <div class="col-10">
-                            <i class="fas fa-clock"></i> {{listing.list_date | timesince }} </div>
-                    </div>
-                    {% if request.user.is_authenticated %}
-                    
 
-                    <div class="row text-secondary pb-2">
-                        <div class="col-10">
-                            <a href="{% url 'add_favourite' listing.id %}">Add to
-                                favorites</a> </div>
-                    </div>
-                 
-                    {% endif %}
+                </div>
+                <!-- Advance Search -->
+                <div class="advance-search">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-12 col-md-12 align-content-center">
+                                <form action="{% url 'search' %}">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <input type="text" name="keywords" class="form-control my-2 my-lg-1"
+                                                id="inputtext4" placeholder="What are you looking for">
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <select class="w-100 form-control mt-lg-1 mt-md-2" name="category">
+                                                <option selected="true" disabled="disabled">Category</option>
+                                                {% for key,value in category_choices.items %}
+                                                <option value="{{key}}" {% if key == values.category %} selected
+                                                    {% endif %}>
+                                                    {{value}}</option>
+                                                {%endfor%}
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <select name="city" class="w-100 form-control mt-lg-1 mt-md-2">
+                                                <option selected="true" disabled="disabled">city (All)</option>
+                                                {% for key,value in city_choices.items %}
+                                                <option value="{{key}}" {% if key == values.city %} selected
+                                                    {% endif %}>{{value}}
+                                                </option>
+                                                {%endfor%}
 
-                    <hr>
-                    <a href="{% url 'listing' listing.id %}" class="btn btn-primary btn-block">More Info</a>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <select name="price" class="w-100 form-control mt-lg-1 mt-md-2">
+                                                <option selected="true" disabled="disabled">Max Price (All)</option>
+                                                {% for key,value in price_choices.items %}
+                                                <option value="{{key}}" {% if key == values.price %} selected
+                                                    {% endif %}>{{value}}
+                                                </option>
+                                                {%endfor%}
+
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-2 align-self-center">
+                                            <button type="submit" class="btn btn-primary">Search Now</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Container End -->
+</section>
+
+<!--===================================
+=            Client Slider            =
+====================================-->
+
+
+<!--===========================================
+=            Popular deals section            =
+============================================-->
+
+<section class="popular-deals section bg-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-title">
+                    <h2>Trending Adds</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas, magnam.</p>
                 </div>
             </div>
-            {% endfor %}
-            {% else %}
-            <div class="col-md-12">
-                <p>Currently there are no listings Available</p>
+        </div>
+        <div class="row">
+            <!-- offer 01 -->
+            <div class="col-lg-12">
+                <div class="trending-ads-slide">
+                    {% if listings %}
+                    {% for listing in listings %}
+                    <div class="col-sm-12 col-lg-4">
+                        <!-- product card -->
+                        <div class="product-item bg-light">
+                            <div class="card">
+                                <div class="thumb-content">
+                                    <div class="price">$200</div>
+                                    <a href="{% url 'listing' listing.id %}">
+                                        <img class="card-img-top img-fluid" src="{{ listing.photo_main.url }}"
+                                            alt="Card image cap" style="height: 200px;">
+                                    </a>
+                                </div>
+                                <div class=" card-body">
+                                    <h4 class="card-title"><a
+                                            href="{% url 'listing' listing.id %}">{{listing.title}}</a>
+                                    </h4>
+                                    <ul class="list-inline product-meta">
+                                        <li class="list-inline-item">
+                                            <a href="{% url 'listing' listing.id %}l"><i
+                                                    class="fa fa-folder-open-o"></i>{{listing.category}}</a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="#"><i class="fa fa-calendar"></i>{{listing.list_date}}</a>
+                                        </li>
+                                    </ul>
+                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                        Explicabo, aliquam!</p>
+                                    <div class="product-ratings">
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+                                            <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+                                            <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+                                            <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <div class="col-md-12">
+                        <p>Currently there are no listings Available</p>
+                    </div>
+                    {%endif%}
+
+
+
+
+                </div>
             </div>
-            {%endif%}
         </div>
 
 
@@ -143,35 +185,180 @@
     </div>
 </section>
 
-<section id="services" class="py-5 bg-secondary text-white">
+
+
+
+<!--==========================================
+=            All Category Section            =
+===========================================-->
+
+<section class=" section">
+    <!-- Container Start -->
     <div class="container">
-        <div class="row text-center">
-            <div class="col-md-4">
-                <i class="fas fa-comment fa-4x mr-4"></i>
-                <hr>
-                <h3>Consulting Services</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae,
-                    provident iste consequatur
-                    hic dignissimos ratione ea quae.</p>
-            </div>
-            <div class="col-md-4">
-                <i class="fas fa-home fa-4x mr-4"></i>
-                <hr>
-                <h3>Propery Management</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae,
-                    provident iste consequatur
-                    hic dignissimos ratione ea quae.</p>
-            </div>
-            <div class="col-md-4">
-                <i class="fas fa-suitcase fa-4x mr-4"></i>
-                <hr>
-                <h3>Renting & Selling</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae,
-                    provident iste consequatur
-                    hic dignissimos ratione ea quae.</p>
+        <div class="row">
+            <div class="col-12">
+                <!-- Section title -->
+                <div class="section-title">
+                    <h2>All Categories</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis, provident!</p>
+                </div>
+                <div class="row">
+                    <!-- Category list -->
+                    <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
+                        <div class="category-block">
+                            <div class="header">
+                                <i class="fa fa-laptop icon-bg-1"></i>
+                                <h4>Electronics</h4>
+                            </div>
+                            <ul class="category-list">
+                                <li><a href="category.html">Laptops <span>93</span></a></li>
+                                <li><a href="category.html">Iphone <span>233</span></a></li>
+                                <li><a href="category.html">Microsoft <span>183</span></a></li>
+                                <li><a href="category.html">Monitors <span>343</span></a></li>
+                            </ul>
+                        </div>
+                    </div> <!-- /Category List -->
+                    <!-- Category list -->
+                    <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
+                        <div class="category-block">
+                            <div class="header">
+                                <i class="fa fa-apple icon-bg-2"></i>
+                                <h4>Restaurants</h4>
+                            </div>
+                            <ul class="category-list">
+                                <li><a href="category.html">Cafe <span>393</span></a></li>
+                                <li><a href="category.html">Fast food <span>23</span></a></li>
+                                <li><a href="category.html">Restaurants <span>13</span></a></li>
+                                <li><a href="category.html">Food Track<span>43</span></a></li>
+                            </ul>
+                        </div>
+                    </div> <!-- /Category List -->
+                    <!-- Category list -->
+                    <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
+                        <div class="category-block">
+                            <div class="header">
+                                <i class="fa fa-home icon-bg-3"></i>
+                                <h4>Real Estate</h4>
+                            </div>
+                            <ul class="category-list">
+                                <li><a href="category.html">Farms <span>93</span></a></li>
+                                <li><a href="category.html">Gym <span>23</span></a></li>
+                                <li><a href="category.html">Hospitals <span>83</span></a></li>
+                                <li><a href="category.html">Parolurs <span>33</span></a></li>
+                            </ul>
+                        </div>
+                    </div> <!-- /Category List -->
+                    <!-- Category list -->
+                    <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
+                        <div class="category-block">
+                            <div class="header">
+                                <i class="fa fa-shopping-basket icon-bg-4"></i>
+                                <h4>Shoppings</h4>
+                            </div>
+                            <ul class="category-list">
+                                <li><a href="category.html">Mens Wears <span>53</span></a></li>
+                                <li><a href="category.html">Accessories <span>212</span></a></li>
+                                <li><a href="category.html">Kids Wears <span>133</span></a></li>
+                                <li><a href="category.html">It & Software <span>143</span></a></li>
+                            </ul>
+                        </div>
+                    </div> <!-- /Category List -->
+                    <!-- Category list -->
+                    <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
+                        <div class="category-block">
+                            <div class="header">
+                                <i class="fa fa-briefcase icon-bg-5"></i>
+                                <h4>Jobs</h4>
+                            </div>
+                            <ul class="category-list">
+                                <li><a href="category.html">It Jobs <span>93</span></a></li>
+                                <li><a href="category.html">Cleaning & Washing <span>233</span></a></li>
+                                <li><a href="category.html">Management <span>183</span></a></li>
+                                <li><a href="category.html">Voluntary Works <span>343</span></a></li>
+                            </ul>
+                        </div>
+                    </div> <!-- /Category List -->
+                    <!-- Category list -->
+                    <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
+                        <div class="category-block">
+                            <div class="header">
+                                <i class="fa fa-car icon-bg-6"></i>
+                                <h4>Vehicles</h4>
+                            </div>
+                            <ul class="category-list">
+                                <li><a href="category.html">Bus <span>193</span></a></li>
+                                <li><a href="category.html">Cars <span>23</span></a></li>
+                                <li><a href="category.html">Motobike <span>33</span></a></li>
+                                <li><a href="category.html">Rent a car <span>73</span></a></li>
+                            </ul>
+                        </div>
+                    </div> <!-- /Category List -->
+                    <!-- Category list -->
+                    <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
+                        <div class="category-block">
+                            <div class="header">
+                                <i class="fa fa-paw icon-bg-7"></i>
+                                <h4>Pets</h4>
+                            </div>
+                            <ul class="category-list">
+                                <li><a href="category.html">Cats <span>65</span></a></li>
+                                <li><a href="category.html">Dogs <span>23</span></a></li>
+                                <li><a href="category.html">Birds <span>113</span></a></li>
+                                <li><a href="category.html">Others <span>43</span></a></li>
+                            </ul>
+                        </div>
+                    </div> <!-- /Category List -->
+                    <!-- Category list -->
+                    <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
+                        <div class="category-block">
+
+                            <div class="header">
+                                <i class="fa fa-laptop icon-bg-8"></i>
+                                <h4>Services</h4>
+                            </div>
+                            <ul class="category-list">
+                                <li><a href="category.html">Cleaning <span>93</span></a></li>
+                                <li><a href="category.html">Car Washing <span>233</span></a></li>
+                                <li><a href="category.html">Clothing <span>183</span></a></li>
+                                <li><a href="category.html">Business <span>343</span></a></li>
+                            </ul>
+                        </div>
+                    </div> <!-- /Category List -->
+
+
+                </div>
             </div>
         </div>
     </div>
+    <!-- Container End -->
 </section>
+
+
+<!--====================================
+=            Call to Action            =
+=====================================-->
+
+<section class="call-to-action overly bg-3 section-sm">
+    <!-- Container Start -->
+    <div class="container">
+        <div class="row justify-content-md-center text-center">
+            <div class="col-md-8">
+                <div class="content-holder">
+                    <h2>Start today to get more exposure and
+                        grow your business</h2>
+                    <ul class="list-inline mt-30">
+                        <li class="list-inline-item"><a class="btn btn-main" href="{% url 'create' %}">Add Listing</a>
+                        </li>
+                        <li class="list-inline-item"><a class="btn btn-secondary" href="{% url 'listings' %}">Browser
+                                Listing</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container End -->
+</section>
+
+
 
 {% endblock %}

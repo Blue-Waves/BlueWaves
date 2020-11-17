@@ -42,15 +42,21 @@ INSTALLED_APPS = [
     'crispy_forms',
 
 
+
     'accounts',
     'Core',
     'inquiry',
     'listing',
     'pages',
+    'direct',
+
+
 
 
 
 ]
+CORS_ORIGIN_ALLOW_ALL = True
+
 
 AUTH_USER_MODEL = 'Core.User'  # changes built-in user model to ours
 
@@ -77,6 +83,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'direct.views.checkDirects',
 
             ],
         },
@@ -139,6 +146,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'BS/static')
 ]
 
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
@@ -150,5 +158,5 @@ MESSAGE_TAGS = {
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'nevogola@gmail.com'
-EMAIL_HOST_PASSWORD = 'rtysqgytjxhvoakg'
+EMAIL_HOST_PASSWORD = 'tozeiflwiyrzqdnl'
 EMAIL_USE_TLS = True

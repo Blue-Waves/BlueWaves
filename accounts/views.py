@@ -141,8 +141,10 @@ def dashboard(request):
 @login_required
 def myinquiries(request):
     myinquiry = inquiry.objects.all().filter(user_id=request.user.id)
+    listings = Listing.objects.all()
     context = {
-        'myinquiries': myinquiry
+        'myinquiries': myinquiry,
+        'listings': listings,
     }
     return render(request, 'accounts/dashboard_myinquiries.html', context)
 
@@ -176,8 +178,20 @@ def send_reply(request):
 
 
 def user_profile(request):
-    args = {'user': request.user}
-    return render(request, 'accounts/user_profile.html', args)
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, instance=request.user)
+
+        if form.is_valid():
+            form.save()
+            return redirect('/accounts/user_profile')
+    else:
+        form = EditProfileForm(instance=request.user)
+        args = {'form': form,
+                'user': request.user}
+        return render(request, 'accounts/user_profile.html', args)
+
+    # args = {'user': request.user}
+    # return render(request, 'accounts/user_profile.html', args)
 
 
 def edit_profile(request):

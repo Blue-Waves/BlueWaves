@@ -2,6 +2,12 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import inquiry
 from django.core.mail import send_mail
+from direct.models import Message
+from Core.models import User
+from django.db.models import Q
+from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
+
 
 
 def inquirys(request):
@@ -37,3 +43,4 @@ def inquirys(request):
             messages.success(
                 request, "Your inquiry has been made. The owner of the post will get back to you asap")
             return redirect('/listing/'+listing_id+'/')
+

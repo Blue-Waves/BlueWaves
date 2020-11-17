@@ -7,7 +7,8 @@ category_choices = {
     'Mobiles': 'Mobiles',
     'Bikes': 'Bikes',
     'Books&Sports': 'Books&Sports',
-    'Fashion': 'Fashion'
+    'Fashion': 'Fashion',
+    'Entertainment': 'Entertainment'
 }
 
 price_choices = {
