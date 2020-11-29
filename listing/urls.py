@@ -11,6 +11,6 @@ urlpatterns = [
     path('search/', views.search, name='search'),
     path('create/', views.create, name="create"),
     path('update/<int:pk>/', views.update, name="update"),
-    path('delete/<int:pk>', views.delete_listing, name="delete"),
+    path('delete/<int:pk>/', views.delete_listing, name="delete"),
     path('new/<username>', views.NewConversation, name='newconversations'),
 ]

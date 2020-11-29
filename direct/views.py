@@ -13,7 +13,7 @@ def inbox(request):
     user = request.user
     messages = Message.get_message(user=user)
     active_direct = None
-    directs =None
+    directs = None
 
     if messages:
         message = messages[0]
@@ -29,9 +29,13 @@ def inbox(request):
         'directs': directs,
         'messages': messages,
         'active_direct': active_direct,
-    }    
-    template = loader.get_template('direct/direct.html')  
+
+
+
+    }
+    template = loader.get_template('direct/direct.html')
     return HttpResponse(template.render(context, request))
+
 
 @login_required
 def Directs(request, username):
@@ -44,13 +48,20 @@ def Directs(request, username):
     for message in messages:
         if message['user'].username == username:
             message['unread'] = 0
+
     context = {
-        'directs':directs,
-        'messages':messages,
-        'active_direct':active_direct
-    }       
+        'directs': directs,
+        'messages': messages,
+        'active_direct': active_direct,
+
+
+
+
+
+    }
     template = loader.get_template('direct/direct.html')
-    return HttpResponse(template.render(context, request)) 
+    return HttpResponse(template.render(context, request))
+
 
 @login_required
 def SendDirect(request):
@@ -63,7 +74,8 @@ def SendDirect(request):
         Message.send_message(from_user, to_user, body)
         return redirect('inbox')
     else:
-        HttpResponseBadRequest()    
+        HttpResponseBadRequest()
+
 
 @login_required
 def UserSearch(request):
@@ -77,10 +89,11 @@ def UserSearch(request):
         user_paginator = paginator.get_page(page_number)
 
         context = {
-            'users': user_paginator, 
+            'users': user_paginator,
         }
     template = loader.get_template('direct/search_user.html')
-    return HttpResponse(template.render(context, request))    
+    return HttpResponse(template.render(context, request))
+
 
 @login_required
 def NewConversation(request, username):
@@ -92,11 +105,13 @@ def NewConversation(request, username):
         return redirect('usersearch')
     if from_user != to_user:
         Message.send_message(from_user, to_user, body)
-    return redirect('inbox')            
+    return redirect('inbox')
+
 
 def checkDirects(request):
     directs_count = 0
     if request.user.is_authenticated:
-        directs_count = Message.objects.filter(user=request.user, is_read=False).count()
+        directs_count = Message.objects.filter(
+            user=request.user, is_read=False).count()
 
     return {'directs_count': directs_count}

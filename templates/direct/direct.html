@@ -42,6 +42,8 @@
     .friend-list li a .friend-name,
     .friend-list li a .friend-name:hover {
         color: #777;
+        padding: 12px 0 0 64px;
+
     }
 
     .friend-list li a .last-message {
@@ -71,7 +73,7 @@
     }
 
     .chat-message {
-        padding: 60px 20px 115px;
+        padding: 60px 20px 20px;
     }
 
     .chat {
@@ -194,6 +196,23 @@
         text-decoration: none;
         outline: 0;
     }
+
+    .chat-message {
+        overflow: auto;
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+
+
+    .avatar-circle {
+        align-items: center;
+        justify-content: center;
+        background-color: #00ffcc;
+        width: 50px;
+        height: 50px;
+        border-radius: 50px
+    }
 </style>
 
 <div class="container bootstrap snippets bootdey">
@@ -209,12 +228,27 @@
                 {% for message in messages %}
                 <li class="{% if active_direct == message.user.username %}active bounceInDown{% endif %}">
                     <a href="{% url 'directs' message.user.username %}" class="clearfix">
-                        <img src="https://bootdey.com/img/Content/user_1.jpg" alt="" class="img-circle">
+
+                        <div class="avatar-circle text-center align-center" style="float: left;">
+                            <p style="padding-top: 25%">
+                                {{ message.user.username.0.upper }}{{ message.user.username.1.upper }}</p>
+                        </div>
+
                         <div class="friend-name">
                             <strong>{{message.user.first_name}} {{ message.user.last_name }}</strong>
                         </div>
-                        <div class="last-message text-muted">Hello, Are you there?</div>
-                        <small class="chat-alert label label-danger">1</small>
+
+
+                        <div class="last-message text-muted"> </div>
+
+
+
+
+                        <small class="chat-alert label label-danger">{% if message.unread %}
+                            <p style="font-weight: bold; color: red;">
+                                <i class="material-icons">mark_chat_unread</i> {{ message.unread }}
+                            </p>
+                            {% endif %}</small>
 
                     </a>
                 </li>
@@ -222,6 +256,7 @@
 
             </ul>
         </div>
+
 
 
 
@@ -235,7 +270,10 @@
                         class="{% if request.user.username == direct.sender.username %}right clearfix{% else %}left clearfix{% endif %}">
                         <span
                             class="{% if request.user.username == direct.sender.username %}chat-img pull-right{% else %}chat-img pull-left{% endif %}">
-                            <img src="https://bootdey.com/img/Content/user_3.jpg" alt="User Avatar">
+                            <div class="avatar-circle text-center align-center" style="float: left;">
+                                <p style="padding-top: 25%">
+                                    {{ direct.sender.username.0.upper }}{{ direct.sender.username.1.upper }}</p>
+                            </div>
                         </span>
                         <div class="chat-body clearfix">
                             <div class="header">

@@ -330,7 +330,79 @@
             </div>
         </div>
     </div>
-    <!-- Container End -->
+</section>
+<!-- Container End -->
+
+<section class=" section">
+    <!-- Container Start -->
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <!-- Section title -->
+                <div class="section-title">
+                    <h2>Recently Added Products</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis, provident!</p>
+                </div>
+                <div class=" product-grid-list">
+                    <div class="row mt-30">
+                        {% if listings %}
+                        {% for listing in listings %}
+                        <div class="col-sm-12 col-lg-3 col-md-6">
+                            <!-- product card -->
+                            <div class="product-item bg-light">
+                                <div class="card">
+                                    <div class="thumb-content">
+                                        <div class="price">${{listing.price}}</div>
+                                        <a href="{% url 'listing' listing.id %}">
+                                            <img class="card-img-top img-fluid" src="{{ listing.photo_main.url }}"
+                                                alt="Card image cap" style="height: 200px;">
+                                        </a>
+                                    </div>
+                                    <div class="card-body">
+                                        <h4 class="card-title"><a
+                                                href="{% url 'listing' listing.id %}">{{listing.title}}</a>
+                                        </h4>
+                                        <ul class="list-inline product-meta">
+                                            <li class="list-inline-item">
+                                                <a href="{% url 'listing' listing.id %}"><i
+                                                        class="fa fa-folder-open-o"></i>{{listing.category}}</a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a href="#"><i class="fa fa-calendar"></i>{{listing.list_date}}</a>
+                                            </li>
+                                        </ul>
+                                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                            Explicabo, aliquam!</p>
+                                        <div class="product-ratings">
+                                            <ul class="list-inline">
+                                                <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <div class="col-md-12">
+                            <p>Currently there are no listings Available</p>
+                        </div>
+                        {%endif%}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 

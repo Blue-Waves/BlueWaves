@@ -11,6 +11,7 @@ from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.core.mail import send_mail
 from inquiry.models import inquiry
 from listing.forms import UpdateForm
+from django.core.paginator import Paginator, EmptyPage
 import random
 import string
 
@@ -132,8 +133,12 @@ def userlogout(request):
 def dashboard(request):
     mylistings = Listing.objects.order_by(
         '-list_date').filter(owner=request.user)
+
+    paginator = Paginator(mylistings, 20)
+    page = request.GET.get('page')
+    page_listings = paginator.get_page(page)
     context = {
-        'listings': mylistings
+        'listings': page_listings
     }
     return render(request, 'accounts/dashboard.html', context)
 

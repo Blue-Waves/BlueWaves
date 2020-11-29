@@ -1088,7 +1088,7 @@ ul.pagination .active a {
 
 .dashboard-container .product-dashboard-table td {
   vertical-align: middle;
-  padding: 40px 40px;
+  padding: 30px 30px;
 }
 
 .dashboard-container .product-thumb {
@@ -1098,6 +1098,10 @@ ul.pagination .active a {
 .dashboard-container tbody tr:hover .action a {
   color: #fff;
 }
+.dashboard-container tbody tr:hover .action button {
+  color: #fff;
+}
+
 
 .dashboard-container tbody tr:hover .action a.edit {
   background: #59d659;
@@ -1107,7 +1111,7 @@ ul.pagination .active a {
   background: #50c6e9;
 }
 
-.dashboard-container tbody tr:hover .action a.delete {
+.dashboard-container tbody tr:hover .action button.delete {
   background: #ff5252;
 }
 
@@ -1154,16 +1158,34 @@ ul.pagination .active a {
   text-align: center;
   display: inline-block;
 }
+.dashboard-container .action button {
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+  font-size: 14px;
+  color: #363b4d;
+  text-align: center;
+  display: inline-block;
+}
 
 .dashboard-container .action a:hover {
+  color: #fff;
+}
+.dashboard-container .action button:hover {
   color: #fff;
 }
 
 .dashboard-container .action a:hover.delete {
   background: #ff5252;
 }
+.dashboard-container .action button:hover.delete {
+  background: #ff5252;
+}
 
 .dashboard-container .action a i {
+  line-height: 40px;
+}
+.dashboard-container .action button i {
   line-height: 40px;
 }
 

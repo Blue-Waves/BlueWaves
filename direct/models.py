@@ -4,9 +4,12 @@ from django.db.models import Max
 
 
 class Message(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
-    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='from_user')
-    recipient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='to_user')
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='user')
+    sender = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='from_user')
+    recipient = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='to_user')
     body = models.TextField(max_length=1000, blank=True, null=True)
     date = models.DateTimeField(auto_now_add=True)
     is_read = models.BooleanField(default=False)
@@ -18,18 +21,20 @@ class Message(models.Model):
             recipient=to_user,
             body=body,
             is_read=True)
-        sender_message.save() 
+        sender_message.save()
 
         recipient_message = Message(
             user=to_user,
-            sender = from_user,
+            sender=from_user,
             body=body,
             recipient=from_user)
         recipient_message.save()
 
         return sender_message
+
     def get_message(user):
-        messages = Message.objects.filter(user=user).values('recipient').annotate(last=Max('date')).order_by('-last')
+        messages = Message.objects.filter(user=user).values(
+            'recipient').annotate(last=Max('date')).order_by('-last')
         users = []
         for message in messages:
             users.append({
@@ -38,4 +43,3 @@ class Message(models.Model):
                 'unread': Message.objects.filter(user=user, recipient__pk=message['recipient'], is_read=False).count()
             })
         return users
-

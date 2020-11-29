@@ -140,16 +140,38 @@
                         <img class="rounded-circle img-fluid mb-5 px-5" src="images/user/user-thumb.jpg" alt="">
                         <h4><a href="">{{listing.owner.first_name}} {{listing.owner.last_name}}</a></h4>
                         <p class="member-time">Member Since Jun 27, 2017</p>
-
+                        {% if request.user.username != listing.owner.username %}
                         <ul class="list-inline mt-20">
-                            <li class="list-inline-item"><a href=""
-                                    class="btn btn-contact d-inline-block  btn-primary px-lg-5 my-1 px-md-3">Contact</a>
-                            </li>
+
                             <li class="list-inline-item"><button
                                     class="btn btn-offer d-inline-block btn-primary ml-n1 my-1 px-lg-4 px-md-3"
                                     data-toggle="modal" data-target="#inquiryModal">Make an
                                     offer</button></li>
+
+                            <form role="form" method="POST" action="{% url 'send_direct' %}" style="margin-top: 10px;">
+                                {% csrf_token %}
+
+                                <input type="hidden" name="to_user" value="{{ listing.owner.username }}">
+                                <div class="field">
+                                    <p class="control">
+                                        <textarea class="textarea" name="body" placeholder="Send seller a message.."
+                                            style="width: 300px;"></textarea>
+                                    </p>
+                                </div>
+                                <nav class="level">
+                                    <div class="level-left">
+                                        <div class="level-item">
+                                            <button type="submit" name="action" class="btn btn-success no-rounded">Send
+                                                Message
+                                                </buttom>
+                                        </div>
+                                    </div>
+                                </nav>
+
+                            </form>
                         </ul>
+                        {% endif %}
+
                     </div>
 
                     <!-- Rate Widget -->

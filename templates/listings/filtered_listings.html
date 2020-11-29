@@ -3,37 +3,67 @@
 {% load humanize %}
 {% block tiltle %} Listings {% endblock %}
 {% block content %}
-<section class="page-search">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <!-- Advance Search -->
-                <div class="advance-search">
-                    <form>
-                        <div class="form-row">
-                            <div class="form-group col-md-4">
-                                <input type="text" class="form-control my-2 my-lg-0" id="inputtext4"
-                                    placeholder="What are you looking for">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <input type="text" class="form-control my-2 my-lg-0" id="inputCategory4"
-                                    placeholder="Category">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <input type="text" class="form-control my-2 my-lg-0" id="inputLocation4"
-                                    placeholder="Location">
-                            </div>
-                            <div class="form-group col-md-2">
 
-                                <button type="submit" class="btn btn-primary">Search Now</button>
-                            </div>
+<style>
+    .arrow {
+        border: solid black;
+        border-width: 0 3px 3px 0;
+        display: inline-block;
+        padding: 2px;
+        margin-right: 5px;
+    }
+
+    .right {
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+    }
+
+    .left {
+        transform: rotate(135deg);
+        -webkit-transform: rotate(135deg);
+    }
+
+    .up {
+        transform: rotate(-135deg);
+        -webkit-transform: rotate(-135deg);
+    }
+
+    .down {
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+    }
+</style>
+<!-- Advance Search -->
+<div class="advance-search">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12 col-md-12 align-content-center">
+                <form action="{% url 'search' %}">
+                    <div class="form-row">
+                        <div class="form-group col-md-8">
+                            <input type="text" name="keywords" class="form-control my-2 my-lg-1" id="inputtext4"
+                                placeholder="What are you looking for?">
                         </div>
-                    </form>
-                </div>
+                        <div class="form-group col-md-2">
+                            <select name="price" class="w-100 form-control mt-lg-1 mt-md-2">
+                                <option selected="true" disabled="disabled">Max Price (All)</option>
+                                {% for key,value in price_choices.items %}
+                                <option value="{{key}}" {% if key == values.price %} selected {% endif %}>{{value}}
+                                </option>
+                                {%endfor%}
+
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-2 align-self-center">
+                            <button type="submit" class="btn btn-primary">Search Now</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-</section>
+</div>
 <section class="section-sm">
     <div class="container">
         <div class="row">
@@ -50,11 +80,17 @@
                     <div class="widget category-list">
                         <h4 class="widget-header">All Category</h4>
                         <ul class="category-list">
-                            <li><a href="{% url 'category_listings' 'Electronics'%}">Electronics
+                            <li><a href="{% url 'category_listings' 'Electronics' %}">Electronics
                                     <span>93</span></a></li>
-                            <li><a href="{% url 'category_listings' 'Vehicels'%}">Vehicles <span>233</span></a></li>
-                            <li><a href="{% url 'category_listings' 'Clothes'%}">Clothes <span>183</span></a></li>
-                            <li><a href="{% url 'category_listings' 'Books'%}">Books <span>343</span></a></li>
+                            <li><a href="{% url 'category_listings' 'Vehicels' %}">Vehicles
+                                    <span>233</span></a></li>
+                            <li><a href="{% url 'category_listings' 'Clothes' %}">Clothes
+                                    <span>183</span></a></li>
+                            <li><a href="{% url 'category_listings' 'Books' %}">Books <span>343</span></a>
+                            </li>
+                            <li>
+
+                            </li>
                         </ul>
                     </div>
 
@@ -95,17 +131,57 @@
 
                 </div>
             </div>
+
             <div class="col-md-9">
                 <div class="category-search-filter">
                     <div class="row">
                         <div class="col-md-6">
-                            <strong>Sort</strong>
-                            <select>
-                                <option>Most Recent</option>
-                                <option value="1">Most Popular</option>
-                                <option value="2">Lowest Price</option>
-                                <option value="4">Highest Price</option>
-                            </select>
+                            <strong>Sort by :</strong>
+                            <ul>
+                                <li class="sort"><a href="">Most Popular</a></li>
+                                {% if city %}
+                                <li class="sort">
+                                    <form class="" action="{% url 'city_listings' city=city  %}" method="POST">
+                                        {% csrf_token %}
+                                        {{ form.as_p }}
+                                        <i class="arrow down"></i><input type="Submit" name="submit-lowest-price"
+                                            value="Lowest Price" />
+                                    </form>
+                                </li>
+                                {% elif category %}
+                                <li class="sort">
+                                    <form class="" action="{% url 'category_listings' category=category  %}"
+                                        method="POST">
+                                        {% csrf_token %}
+                                        {{ form.as_p }}
+                                        <i class="arrow down"></i><input type="Submit" name="submit-lowest-price"
+                                            value="Lowest Price" />
+                                    </form>
+                                </li>
+                                {% endif %}
+
+                                {% if city %}
+                                <li class="sort">
+                                    <form class="" action="{% url 'city_listings' city=city  %}" method="POST">
+                                        {% csrf_token %}
+                                        {{ form.as_p }}
+                                        <i class="arrow up"></i><input type="Submit" name="submit-highest-price"
+                                            value="Highest Price" />
+                                    </form>
+                                </li>
+                                {% elif category %}
+                                <li class="sort">
+                                    <form class="" action="{% url 'category_listings' category=category  %}"
+                                        method="POST">
+                                        {% csrf_token %}
+                                        {{ form.as_p }}
+                                        <i class="arrow up"></i><input type="Submit" name="submit-highest-price"
+                                            value="HighestPrice" />
+                                    </form>
+                                <li>
+                                    {% endif %}
+
+                            </ul>
                         </div>
                         <div class="col-md-6">
                             <div class="view">
