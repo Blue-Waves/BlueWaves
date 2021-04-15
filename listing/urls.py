@@ -7,6 +7,8 @@ urlpatterns = [
          views.category_listings, name='category_listings'),
     path('city_listings/<city>',
          views.city_listings, name='city_listings'),
+    path('sub_category_listings/<sub_category>',
+         views.sub_category_listings, name='sub_category_listings'),
     path('<int:pk>/', views.listing, name='listing'),
     path('search/', views.search, name='search'),
     path('create/', views.create, name="create"),

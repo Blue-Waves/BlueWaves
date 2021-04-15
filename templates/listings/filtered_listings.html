@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static  %}
+{% load static %}
 {% load humanize %}
 {% block tiltle %} Listings {% endblock %}
 {% block content %}
@@ -48,7 +48,8 @@
                             <select name="price" class="w-100 form-control mt-lg-1 mt-md-2">
                                 <option selected="true" disabled="disabled">Max Price (All)</option>
                                 {% for key,value in price_choices.items %}
-                                <option value="{{key}}" {% if key == values.price %} selected {% endif %}>{{value}}
+                                <option value="{{key}}" {% ifequal key values.price %} selected {% endifequal %}>
+                                    {{value}}
                                 </option>
                                 {%endfor%}
 
@@ -69,7 +70,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="search-result bg-gray">
-                    <h2>Results For "{{category}}{{city}}"</h2>
+                    <h2>Results For "{{category}}{{city}}{{sub_category}}"</h2>
                     <p>123 Results on 12 December, 2017</p>
                 </div>
             </div>
@@ -97,11 +98,14 @@
                     <div class="widget category-list">
                         <h4 class="widget-header">Nearby</h4>
                         <ul class="category-list">
-                            <li><a href="{% url 'city_listings' 'Lefkosa' %}">Lefkosa <span>93</span></a></li>
-                            <li><a href="{% url 'city_listings' 'Girne' %}">Girne <span>233</span></a></li>
-                            <li><a href="{% url 'city_listings' 'Magusa' %}">Magusa <span>183</span></a></li>
-                            <li><a href="{% url 'city_listings' 'Lefke' %}">Lefke <span>120</span></a></li>
-                            <li><a href="{% url 'city_listings' 'Guzelyurt' %}">Guzelyurt <span>40</span></a></li>
+                            <li><a href="{% url 'city_listings' 'Lefkosa' %}">Lefkosa <span>{{city_sum.0}}</span></a>
+                            </li>
+                            <li><a href="{% url 'city_listings' 'Girne' %}">Girne <span>{{city_sum.1}}</span></a></li>
+                            <li><a href="{% url 'city_listings' 'Magusa' %}">Magusa <span>{{city_sum.2}}</span></a></li>
+                            <li><a href="{% url 'city_listings' 'Lefke' %}">Lefke <span>{{city_sum.3}}</span></a></li>
+                            <li><a href="{% url 'city_listings' 'Guzelyurt' %}">Guzelyurt
+                                    <span>{{city_sum.4}}</span></a>
+                            </li>
 
                         </ul>
                     </div>

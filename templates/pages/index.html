@@ -1,5 +1,5 @@
-{% extends 'base.html' %}
-{% load static  %}
+{% extends 'base2.html' %}
+{% load static %}
 {% load humanize %}
 {% block title %} Home{% endblock %}
 {% block content %}
@@ -24,18 +24,22 @@
                         <h2>Popular Category</h2>
                         <ul class="list-inline">
                             <li class="list-inline-item">
-                                <a href="category.html"><i class="fa fa-bed"></i> Hotel</a></li>
-                            <li class="list-inline-item">
-                                <a href="category.html"><i class="fa fa-grav"></i> Fitness</a>
+                                <a href="{% url 'category_listings' 'Electronics' %}"><i class="fa fa-phone"></i>
+                                    Electronics</a>
                             </li>
                             <li class="list-inline-item">
-                                <a href="category.html"><i class="fa fa-car"></i> Cars</a>
+                                <a href="{% url 'category_listings' 'Sports & Outdoors Equipment' %}"><i
+                                        class="fa fa-grav"></i> Sports & Outdoor Equipment</a>
                             </li>
                             <li class="list-inline-item">
-                                <a href="category.html"><i class="fa fa-cutlery"></i> Restaurants</a>
+                                <a href="{% url 'category_listings' 'Vehicles' %}"><i class="fa fa-car"></i> Cars</a>
                             </li>
                             <li class="list-inline-item">
-                                <a href="category.html"><i class="fa fa-coffee"></i> Cafe</a>
+                                <a href="{% url 'category_listings' 'Jobs' %}"><i class="fa fa-briefcase"></i> Jobs</a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="{% url 'category_listings' 'Property' %}"><i class="fa fa-building"></i>
+                                    Property</a>
                             </li>
                         </ul>
                     </div>
@@ -56,9 +60,9 @@
                                             <select class="w-100 form-control mt-lg-1 mt-md-2" name="category">
                                                 <option selected="true" disabled="disabled">Category</option>
                                                 {% for key,value in category_choices.items %}
-                                                <option value="{{key}}" {% if key == values.category %} selected
-                                                    {% endif %}>
-                                                    {{value}}</option>
+                                                <option value="{{key}}">
+                                                    {{value}}
+                                                </option>
                                                 {%endfor%}
                                             </select>
                                         </div>
@@ -66,8 +70,8 @@
                                             <select name="city" class="w-100 form-control mt-lg-1 mt-md-2">
                                                 <option selected="true" disabled="disabled">city (All)</option>
                                                 {% for key,value in city_choices.items %}
-                                                <option value="{{key}}" {% if key == values.city %} selected
-                                                    {% endif %}>{{value}}
+                                                <option value="{{key}}">
+                                                    {{value}}
                                                 </option>
                                                 {%endfor%}
 
@@ -77,8 +81,8 @@
                                             <select name="price" class="w-100 form-control mt-lg-1 mt-md-2">
                                                 <option selected="true" disabled="disabled">Max Price (All)</option>
                                                 {% for key,value in price_choices.items %}
-                                                <option value="{{key}}" {% if key == values.price %} selected
-                                                    {% endif %}>{{value}}
+                                                <option value="{{key}}">
+                                                    {{value}}
                                                 </option>
                                                 {%endfor%}
 
@@ -188,6 +192,8 @@
 
 
 
+
+
 <!--==========================================
 =            All Category Section            =
 ===========================================-->
@@ -208,58 +214,22 @@
                         <div class="category-block">
                             <div class="header">
                                 <i class="fa fa-laptop icon-bg-1"></i>
-                                <h4>Electronics</h4>
+                                <h4><a href="{% url 'category_listings' 'Electronics' %}">Electronics</a></h4>
                             </div>
                             <ul class="category-list">
-                                <li><a href="category.html">Laptops <span>93</span></a></li>
-                                <li><a href="category.html">Iphone <span>233</span></a></li>
-                                <li><a href="category.html">Microsoft <span>183</span></a></li>
-                                <li><a href="category.html">Monitors <span>343</span></a></li>
-                            </ul>
-                        </div>
-                    </div> <!-- /Category List -->
-                    <!-- Category list -->
-                    <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-                        <div class="category-block">
-                            <div class="header">
-                                <i class="fa fa-apple icon-bg-2"></i>
-                                <h4>Restaurants</h4>
-                            </div>
-                            <ul class="category-list">
-                                <li><a href="category.html">Cafe <span>393</span></a></li>
-                                <li><a href="category.html">Fast food <span>23</span></a></li>
-                                <li><a href="category.html">Restaurants <span>13</span></a></li>
-                                <li><a href="category.html">Food Track<span>43</span></a></li>
-                            </ul>
-                        </div>
-                    </div> <!-- /Category List -->
-                    <!-- Category list -->
-                    <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-                        <div class="category-block">
-                            <div class="header">
-                                <i class="fa fa-home icon-bg-3"></i>
-                                <h4>Real Estate</h4>
-                            </div>
-                            <ul class="category-list">
-                                <li><a href="category.html">Farms <span>93</span></a></li>
-                                <li><a href="category.html">Gym <span>23</span></a></li>
-                                <li><a href="category.html">Hospitals <span>83</span></a></li>
-                                <li><a href="category.html">Parolurs <span>33</span></a></li>
-                            </ul>
-                        </div>
-                    </div> <!-- /Category List -->
-                    <!-- Category list -->
-                    <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-                        <div class="category-block">
-                            <div class="header">
-                                <i class="fa fa-shopping-basket icon-bg-4"></i>
-                                <h4>Shoppings</h4>
-                            </div>
-                            <ul class="category-list">
-                                <li><a href="category.html">Mens Wears <span>53</span></a></li>
-                                <li><a href="category.html">Accessories <span>212</span></a></li>
-                                <li><a href="category.html">Kids Wears <span>133</span></a></li>
-                                <li><a href="category.html">It & Software <span>143</span></a></li>
+                                <li><a href="{% url 'sub_category_listings' 'Phones' %}">Phones
+                                        <span>{{sub_category_sum.0}}</span></a></li>
+                                <li><a href="{% url 'sub_category_listings' 'TV' %}">TV
+                                        <span>{{sub_category_sum.1}}</span></a></li>
+                                <li><a href="{% url 'sub_category_listings' 'Computer & Laptops' %}">Computer & Laptops
+                                        <span>{{sub_category_sum.2}}</span></a></li>
+                                <li><a href="{% url 'sub_category_listings' 'Gaming Consoles' %}">Gaming Consoles
+                                        <span>{{sub_category_sum.3}}</span></a></li>
+                                <li><a href="{% url 'sub_category_listings' 'Computer Hardware & Accessories' %}">Computer
+                                        Hardware & Accessories<span>{{sub_category_sum.4}}</span></a></li>
+                                <li><a
+                                        href="{% url 'sub_category_listings' 'Cameras' %}">Cameras<span>{{sub_category_sum.5}}</span></a>
+                                </li>
                             </ul>
                         </div>
                     </div> <!-- /Category List -->
@@ -268,13 +238,22 @@
                         <div class="category-block">
                             <div class="header">
                                 <i class="fa fa-briefcase icon-bg-5"></i>
-                                <h4>Jobs</h4>
+                                <h4><a href="{% url 'category_listings' 'Services' %}">Services</a></h4>
                             </div>
                             <ul class="category-list">
-                                <li><a href="category.html">It Jobs <span>93</span></a></li>
-                                <li><a href="category.html">Cleaning & Washing <span>233</span></a></li>
-                                <li><a href="category.html">Management <span>183</span></a></li>
-                                <li><a href="category.html">Voluntary Works <span>343</span></a></li>
+                                <li><a href="{% url 'sub_category_listings' 'Construction' %}">Construction
+                                        <span>{{sub_category_sum.33}}</span></a></li>
+                                <li><a href="{% url 'sub_category_listings' 'Other Services' %}">Other Services
+                                        <span>{{sub_category_sum.34}}</span></a></li>
+                                <li><a href="{% url 'sub_category_listings' 'Event Services' %}">Event Services
+                                        <span>{{sub_category_sum.35}}</span></a></li>
+                                <li><a href="{% url 'sub_category_listings' 'Transport' %}">Transport
+                                        <span>{{sub_category_sum.36}}</span></a></li>
+                                <li><a href="{% url 'sub_category_listings' 'Repairs' %}">Repairs
+                                        <span>{{sub_category_sum.37}}</span></a>
+                                </li>
+                                <li><a href="{% url 'sub_category_listings' 'Domestic Help' %}">Domestic Help
+                                        <span>{{sub_category_sum.38}}</span></a></li>
                             </ul>
                         </div>
                     </div> <!-- /Category List -->
@@ -283,13 +262,45 @@
                         <div class="category-block">
                             <div class="header">
                                 <i class="fa fa-car icon-bg-6"></i>
-                                <h4>Vehicles</h4>
+                                <h4><a href="{% url 'category_listings' 'Vehicles' %}">Vehicles</a></h4>
                             </div>
                             <ul class="category-list">
-                                <li><a href="category.html">Bus <span>193</span></a></li>
-                                <li><a href="category.html">Cars <span>23</span></a></li>
-                                <li><a href="category.html">Motobike <span>33</span></a></li>
-                                <li><a href="category.html">Rent a car <span>73</span></a></li>
+                                <li><a href="{% url 'sub_category_listings' 'Cars' %}">Cars
+                                        <span>{{sub_category_sum.6}}</span></a></li>
+                                <li><a href="{% url 'sub_category_listings' 'Car Accessories' %}">Car Accessories
+                                        <span>{{sub_category_sum.7}}</span></a></li>
+
+                                <li><a href="{% url 'sub_category_listings' 'Motorcycles and Scooters' %}">Motorcycles
+                                        and Scooters <span>{{sub_category_sum.8}}</span></a></li>
+                                <li><a href="{% url 'sub_category_listings' 'Trucks' %}">Trucks
+                                        <span>{{sub_category_sum.9}}</span></a></li>
+                                <li><a href="{% url 'sub_category_listings' 'Boats' %}">Boats
+                                        <span>{{sub_category_sum.10}}</span></a></li>
+                                <li><a href="{% url 'sub_category_listings' 'Caravans' %}">Caravans
+                                        <span>{{sub_category_sum.11}}</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div> <!-- /Category List -->
+
+                    <!-- Category list -->
+                    <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
+                        <div class="category-block">
+                            <div class="header">
+                                <i class="fa fa-home icon-bg-3"></i>
+                                <h4><a href="{% url 'category_listings' 'Property' %}">Property</a></h4>
+                            </div>
+                            <ul class="category-list">
+                                <li><a href="{% url 'sub_category_listings' 'Houses & Flats for Rent' %}">Houses &
+                                        Flats for Rent <span>{{sub_category_sum.21}}</span></a></li>
+                                <li><a href="{% url 'sub_category_listings' 'Houses & Flats for Sale' %}">Houses &
+                                        Flats for Sale <span>{{sub_category_sum.22}}</span></a></li>
+                                <li><a href="{% url 'sub_category_listings' 'Land' %}">Land
+                                        <span>{{sub_category_sum.23}}</span></a></li>
+                                <li><a href="{% url 'sub_category_listings' 'Office Space' %}">Office Space
+                                        <span>{{sub_category_sum.24}}</span></a></li>
+                                <li><a href="{% url 'sub_category_listings' 'Vacation Rentals' %}">Vacation Rentals
+                                        <span>{{sub_category_sum.25}}</span></a></li>
                             </ul>
                         </div>
                     </div> <!-- /Category List -->
@@ -297,14 +308,60 @@
                     <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
                         <div class="category-block">
                             <div class="header">
-                                <i class="fa fa-paw icon-bg-7"></i>
-                                <h4>Pets</h4>
+                                <i class="fa fa-apple icon-bg-2"></i>
+                                <h4><a href="{% url 'category_listings' 'Home & Garden Tools' %}">Home & Garden
+                                        Tools</a></h4>
                             </div>
                             <ul class="category-list">
-                                <li><a href="category.html">Cats <span>65</span></a></li>
-                                <li><a href="category.html">Dogs <span>23</span></a></li>
-                                <li><a href="category.html">Birds <span>113</span></a></li>
-                                <li><a href="category.html">Others <span>43</span></a></li>
+                                <li><a href="{% url 'sub_category_listings' 'Furniture and Decor' %}">Furniture and
+                                        Decor <span>{{sub_category_sum.14}}</span></a></li>
+                                <li><a href="{% url 'sub_category_listings' 'Homeware Appliances' %}">Homeware
+                                        Appliances <span>{{sub_category_sum.15}}</span></a></li>
+                                <li><a href="{% url 'sub_category_listings' 'Tools & DIY' %}">Tools & DIY
+                                        <span>{{sub_category_sum.16}}</span></a></li>
+                                <li><a href="{% url 'sub_category_listings' 'Garden & Braai' %}">Garden &
+                                        Braai<span>{{sub_category_sum.17}}</span></a></li>
+                            </ul>
+                        </div>
+                    </div> <!-- /Category List -->
+
+                    <!-- Category list -->
+                    <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
+                        <div class="category-block">
+                            <div class="header">
+                                <i class="fa fa-shopping-basket icon-bg-4"></i>
+                                <h4><a href="{% url 'category_listings' 'Farming & Industrial' %}">Farming &
+                                        Industrial</a></h4>
+                            </div>
+                            <ul class="category-list">
+                                <li><a href="{% url 'sub_category_listings' 'Farming Vehicles' %}">Farming Vehicles
+                                        <span>{{sub_category_sum.41}}</span></a></li>
+                                <li><a href="{% url 'sub_category_listings' 'Livestock' %}">Livestock
+                                        <span>{{sub_category_sum.42}}</span></a></li>
+                                <li><a href="{% url 'sub_category_listings' 'Farming Equipment' %}">Farming
+                                        Equipment <span>{{sub_category_sum.43}}</span></a></li>
+                                <li><a href="{% url 'sub_category_listings' 'Feeds, Supplements & Seeds' %}">Feeds,
+                                        Supplements & Seeds <span>{{sub_category_sum.44}}</span></a></li>
+                            </ul>
+                        </div>
+                    </div> <!-- /Category List -->
+
+                    <!-- Category list -->
+                    <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
+                        <div class="category-block">
+                            <div class="header">
+                                <i class="fa fa-paw icon-bg-7"></i>
+                                <h4><a href="{% url 'category_listings' 'Pets' %}">Pets</a></h4>
+                            </div>
+                            <ul class="category-list">
+                                <li><a href="{% url 'sub_category_listings' 'Dogs, Cats' %}">Dogs &
+                                        Cats
+                                        <span>{{sub_category_sum.45}}</span></a></li>
+                                <li><a href="{% url 'sub_category_listings' 'Other Pets' %}">Other Pets
+                                        <span>{{sub_category_sum.46}}</span></a></li>
+                                <li><a href="{% url 'sub_category_listings' 'Pet Accessories' %}">Pet Accessories
+                                        <span>{{sub_category_sum.47}}</span></a></li>
+                                <li><a href="#">Coming soon <span>0</span></a></li>
                             </ul>
                         </div>
                     </div> <!-- /Category List -->
@@ -314,13 +371,18 @@
 
                             <div class="header">
                                 <i class="fa fa-laptop icon-bg-8"></i>
-                                <h4>Services</h4>
+                                <h4><a href="{% url 'category_listings' 'Hobbies & Interests' %}">Hobbies &
+                                        Interests</a></h4>
                             </div>
                             <ul class="category-list">
-                                <li><a href="category.html">Cleaning <span>93</span></a></li>
-                                <li><a href="category.html">Car Washing <span>233</span></a></li>
-                                <li><a href="category.html">Clothing <span>183</span></a></li>
-                                <li><a href="category.html">Business <span>343</span></a></li>
+                                <li><a href="{% url 'sub_category_listings' 'Toys & Games' %}">Toys & Games
+                                        <span>{{sub_category_sum.29}}</span></a></li>
+                                <li><a href="{% url 'sub_category_listings' 'Musical Instruments' %}">Musical
+                                        Instruments <span>{{sub_category_sum.30}}</span></a></li>
+                                <li><a href="{% url 'sub_category_listings' 'Art' %}">Art
+                                        <span>{{sub_category_sum.31}}</span></a></li>
+                                <li><a href="{% url 'sub_category_listings' 'Books, CDs, DVDs' %}">Books, CDs, DVDs
+                                        <span>{{sub_category_sum.32}}</span></a></li>
                             </ul>
                         </div>
                     </div> <!-- /Category List -->

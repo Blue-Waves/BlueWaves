@@ -11,15 +11,15 @@
                     <form action="{% url 'register' %}" method="POST">
                         {% csrf_token %}
                         <fieldset class="p-4">
-                            <input type="email" placeholder="First Name*" class="border p-3 w-100 my-2"
-                                name="first_name" required>
-                            <input type="email" placeholder="Last Name*" class="border p-3 w-100 my-2" name="last_name"
+                            <input type="text" placeholder="First Name*" class="border p-3 w-100 my-2" name="first_name"
                                 required>
-                            <input type="email" placeholder="Username*" class="border p-3 w-100 my-2" name="username"
+                            <input type="text" placeholder="Last Name*" class="border p-3 w-100 my-2" name="last_name"
+                                required>
+                            <input type="text" placeholder="Username*" class="border p-3 w-100 my-2" name="username"
                                 required>
                             <input type="email" placeholder="Email*" class="border p-3 w-100 my-2" name="email"
                                 required>
-                            <input type="email" placeholder="Phone Number*" class="border p-3 w-100 my-2" name="phone"
+                            <input type="number" placeholder="Phone Number*" class="border p-3 w-100 my-2" name="phone"
                                 required>
                             <input type="password" placeholder="Password*" class="border p-3 w-100 my-2" name="password"
                                 required>

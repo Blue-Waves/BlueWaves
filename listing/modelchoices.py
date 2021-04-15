@@ -1,21 +1,26 @@
-# category_choices = {
-#     ('Electronics', 'Electronics'),
-#     # ('Property', 'Property'),
-#     # ('Cars', 'Cars'),
-#     # ('Furniture', 'Furniture'),
-#     # ('Jobs', 'Jobs'),
-#     # ('Mobiles', 'Mobiles'),
-#     # ('Bikes', 'Bikes'),
-#     # ('Books&Sports', 'Books&Sports'),
-#     # ('Entertainment', 'Entertainment'),
-# }
+category_options = [
+
+    'Electronics',
+    'Vehicles',
+    'Jobs',
+    'Home & Garden Tools',
+    'Sports & Outdoors',
+    'Property',
+    'Fashion & Beauty',
+    'Hobbies & Interests',
+    'Services',
+    'Kids & Baby',
+    'Farming & Industrial',
+    'Pets'
+
+]
 
 
-# city_choices = {
-#     ('Lefkosa', 'Lefkosa'),
-#     ('Gazimagusa', 'Gazimagusa'),
-#     ('Girne', 'Girne'),
-#     ('Lefke', 'Lefke'),
-#     ('Guzelyurt', 'Guzelyurt'),
+city_options = [
+    'Lefkosa',
+    'Girne',
+    'Magusa',
+    'Lefke',
+    'Guzelyurt'
 
-# }
+]

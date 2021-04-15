@@ -3,7 +3,7 @@ from .models import Listing
 
 
 class ListAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'owner', 'category',
+    list_display = ('id', 'title', 'owner', 'category', 'sub_category',
                     'price', 'is_published', 'list_date')
 
     list_display_links = ('id', 'title')

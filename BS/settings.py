@@ -160,3 +160,5 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'nevogola@gmail.com'
 EMAIL_HOST_PASSWORD = 'tozeiflwiyrzqdnl'
 EMAIL_USE_TLS = True
+
+FILE_SIZE_LIMIT_IN_KILOBYTES = 512
