@@ -129,58 +129,6 @@ def userlogout(request):
         return redirect('index')
 
 
-@login_required
-def dashboard(request):
-    mylistings = Listing.objects.order_by(
-        '-list_date').filter(owner=request.user)
-
-    paginator = Paginator(mylistings, 20)
-    page = request.GET.get('page')
-    page_listings = paginator.get_page(page)
-    context = {
-        'listings': page_listings
-    }
-    return render(request, 'accounts/dashboard.html', context)
-
-
-@login_required
-def myinquiries(request):
-    myinquiry = inquiry.objects.all().filter(user_id=request.user.id)
-    listings = Listing.objects.all()
-    context = {
-        'myinquiries': myinquiry,
-        'listings': listings,
-    }
-    return render(request, 'accounts/dashboard_myinquiries.html', context)
-
-
-@login_required
-def inquiry1(request):
-    myinquiry = inquiry.objects.all().filter(owner_id=request.user.id)
-    context = {
-        'inquiries': myinquiry
-    }
-    return render(request, 'accounts/dashboard_inquiries.html', context)
-
-
-@login_required
-def send_reply(request):
-    if request.method == "POST":
-        email = request.POST['email']
-        message = request.POST['message']
-        lisiting = request.POST['listing']
-        send_mail(
-            'Reply from ' + lisiting + ' owner',
-            message,
-            'nevogola@gmail.com',
-            [email],
-            fail_silently=False
-        )
-        messages.success(request, 'Your reply has been sent successfully')
-        return redirect('inquiry1')
-    else:
-        return redirect('dashboard')
-
 
 def user_profile(request):
     if request.method == 'POST':
@@ -231,22 +179,3 @@ def change_password(request):
         return render(request, 'accounts/change_password.html', args)
 
 
-@login_required
-def add_favourite(request, id):
-    post = get_object_or_404(Listing, id=id)
-    if post.favourites.filter(id=request.user.id).exists():
-        post.favourites.remove(request.user)
-    else:
-        post.favourites.add(request.user)
-    return HttpResponseRedirect(request.META['HTTP_REFERER'])
-
-
-@login_required
-def favourites_list(request):
-    new = Listing.objects.order_by(
-        '-list_date').filter(favourites=request.user)
-    return render(
-        request,
-        'accounts/favourites.html',
-        {'new': new}
-    )
