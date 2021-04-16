@@ -45,10 +45,8 @@ INSTALLED_APPS = [
 
     'accounts',
     'Core',
-    'inquiry',
-    'listing',
     'pages',
-    'direct',
+    
 
 
 
