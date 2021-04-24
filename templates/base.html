@@ -69,250 +69,250 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <script src="{% static 'js/script.js' %}"></script>
 
     <script>
-        $(document).ready(function () {
-            $('#id_sub_category').empty();
+        // $(document).ready(function () {
+        //     $('#id_sub_category').empty();
 
-            var electronicsStrings = JSON.parse('{{ json_electronics_strings | escapejs }}');
-            var vehiclesStrings = JSON.parse('{{ json_vehicles_strings | escapejs }}');
-            var homeGardenToolsStrings = JSON.parse('{{ json_home_garden_tools_strings | escapejs }}');
-            var sportsOutdoorsStrings = JSON.parse('{{ json_sports_outdoors_strings | escapejs }}');
-            var propertyStrings = JSON.parse('{{ json_property_strings | escapejs }}');
-            var fashionBeautyStrings = JSON.parse('{{ json_fashion_beauty_strings | escapejs }}');
-            var hobbiesInterestsStrings = JSON.parse('{{ json_hobbies_interests_strings | escapejs }}');
-            var servicesStrings = JSON.parse('{{ json_services_strings | escapejs }}');
-            var kidsBabyStrings = JSON.parse('{{ json_kids_baby_strings | escapejs }}');
-            var farmingIndustrialStrings = JSON.parse('{{ json_farming_industrial_strings | escapejs }}');
-            var petsStrings = JSON.parse('{{ json_pets_strings | escapejs }}');
-            var jobsStrings = JSON.parse('{{ json_jobs_strings | escapejs }}');
-
-
-
-            $('#id_category').on('change', function () {
-                var category = $('#id_category').val();
-
-                if (category == 'Electronics') {
-                    $('#id_sub_category').empty();
-
-                    var length = electronicsStrings.length;
-                    var i;
-                    for (i = 0; i < length; i++) {
-                        sub_category = electronicsStrings[i];
-                        $('#id_sub_category').append(
-                            `
-                                <option value="${sub_category}">
-                                    ${sub_category}
-                                </option>
-                                `
-                        );
-                    }
-
-                }
-                else if (category == 'Vehicles') {
-                    $('#id_sub_category').empty();
-
-                    var length = vehiclesStrings.length;
-                    var i;
-                    for (i = 0; i < length; i++) {
-                        sub_category = vehiclesStrings[i];
-                        $('#id_sub_category').append(
-                            `
-                                <option value="${sub_category}">
-                                    ${sub_category}
-                                </option>
-                                `
-                        );
-                    }
+        //     var actionStrings = JSON.parse('{{ json_action_strings | escapejs }}');
+        //     var adventureStrings = JSON.parse('{{ json_adventure_strings | escapejs }}');
+        //     var homeGardenToolsStrings = JSON.parse('{{ json_racing_strings | escapejs }}');
+        //     var sportsOutdoorsStrings = JSON.parse('{{ json_sports_strings | escapejs }}');
+        //     var propertyStrings = JSON.parse('{{ json_simulation_strings | escapejs }}');
+        //     var fashionBeautyStrings = JSON.parse('{{ json_consoles_strings | escapejs }}');
+        //     var hobbiesInterestsStrings = JSON.parse('{{ json_accessories_strings | escapejs }}');
+        //     var servicesStrings = JSON.parse('{{ json_services_strings | escapejs }}');
+        //     var kidsBabyStrings = JSON.parse('{{ json_open_world_strings | escapejs }}');
+        //     var farmingIndustrialStrings = JSON.parse('{{ json_farming_industrial_strings | escapejs }}');
+        //     var petsStrings = JSON.parse('{{ json_pets_strings | escapejs }}');
+        //     var jobsStrings = JSON.parse('{{ json_jobs_strings | escapejs }}');
 
 
-                }
-                else if (category == 'Home & Garden Tools') {
-                    $('#id_sub_category').empty();
 
-                    var length = homeGardenToolsStrings.length;
-                    var i;
-                    for (i = 0; i < length; i++) {
-                        sub_category = homeGardenToolsStrings[i];
-                        $('#id_sub_category').append(
-                            `
-                                <option value="${sub_category}">
-                                    ${sub_category}
-                                </option>
-                                `
-                        );
-                    }
+        //     $('#id_category').on('change', function () {
+        //         var category = $('#id_category').val();
 
+        //         if (category == 'Action') {
+        //             $('#id_sub_category').empty();
 
-                }
-                else if (category == 'Sports & Outdoors Equipment') {
-                    $('#id_sub_category').empty();
+        //             var length = actionStrings.length;
+        //             var i;
+        //             for (i = 0; i < length; i++) {
+        //                 sub_category = actionStrings[i];
+        //                 $('#id_sub_category').append(
+        //                     `
+        //                         <option value="${sub_category}">
+        //                             ${sub_category}
+        //                         </option>
+        //                         `
+        //                 );
+        //             }
 
-                    var length = sportsOutdoorsStrings.length;
-                    var i;
-                    for (i = 0; i < length; i++) {
-                        sub_category = sportsOutdoorsStrings[i];
-                        $('#id_sub_category').append(
-                            `
-                                <option value="${sub_category}">
-                                    ${sub_category}
-                                </option>
-                                `
-                        );
-                    }
+        //         }
+        //         else if (category == 'Adventure') {
+        //             $('#id_sub_category').empty();
 
-
-                }
-                else if (category == 'Property') {
-                    $('#id_sub_category').empty();
-
-                    var length = propertyStrings.length;
-                    var i;
-                    for (i = 0; i < length; i++) {
-                        sub_category = propertyStrings[i];
-                        $('#id_sub_category').append(
-                            `
-                                <option value="${sub_category}">
-                                    ${sub_category}
-                                </option>
-                                `
-                        );
-                    }
+        //             var length = adventureStrings.length;
+        //             var i;
+        //             for (i = 0; i < length; i++) {
+        //                 sub_category = adventureStrings[i];
+        //                 $('#id_sub_category').append(
+        //                     `
+        //                         <option value="${sub_category}">
+        //                             ${sub_category}
+        //                         </option>
+        //                         `
+        //                 );
+        //             }
 
 
-                }
-                else if (category == 'Fashion & Beauty') {
-                    $('#id_sub_category').empty();
+        //         }
+        //         else if (category == 'Racing') {
+        //             $('#id_sub_category').empty();
 
-                    var length = fashionBeautyStrings.length;
-                    var i;
-                    for (i = 0; i < length; i++) {
-                        sub_category = fashionBeautyStrings[i];
-                        $('#id_sub_category').append(
-                            `
-                                <option value="${sub_category}">
-                                    ${sub_category}
-                                </option>
-                                `
-                        );
-                    }
-
-
-                }
-                else if (category == 'Hobbies & Interests') {
-                    $('#id_sub_category').empty();
-
-                    var length = hobbiesInterestsStrings.length;
-                    var i;
-                    for (i = 0; i < length; i++) {
-                        sub_category = hobbiesInterestsStrings[i];
-                        $('#id_sub_category').append(
-                            `
-                                <option value="${sub_category}">
-                                    ${sub_category}
-                                </option>
-                                `
-                        );
-                    }
+        //             var length = homeGardenToolsStrings.length;
+        //             var i;
+        //             for (i = 0; i < length; i++) {
+        //                 sub_category = homeGardenToolsStrings[i];
+        //                 $('#id_sub_category').append(
+        //                     `
+        //                         <option value="${sub_category}">
+        //                             ${sub_category}
+        //                         </option>
+        //                         `
+        //                 );
+        //             }
 
 
-                }
-                else if (category == 'Services') {
-                    $('#id_sub_category').empty();
+        //         }
+        //         else if (category == 'Sports') {
+        //             $('#id_sub_category').empty();
 
-                    var length = servicesStrings.length;
-                    var i;
-                    for (i = 0; i < length; i++) {
-                        sub_category = servicesStrings[i];
-                        $('#id_sub_category').append(
-                            `
-                                <option value="${sub_category}">
-                                    ${sub_category}
-                                </option>
-                                `
-                        );
-                    }
-
-
-                }
-                else if (category == 'Kids & Baby') {
-                    $('#id_sub_category').empty();
-
-                    var length = kidsBabyStrings.length;
-                    var i;
-                    for (i = 0; i < length; i++) {
-                        sub_category = kidsBabyStrings[i];
-                        $('#id_sub_category').append(
-                            `
-                                <option value="${sub_category}">
-                                    ${sub_category}
-                                </option>
-                                `
-                        );
-                    }
+        //             var length = sportsOutdoorsStrings.length;
+        //             var i;
+        //             for (i = 0; i < length; i++) {
+        //                 sub_category = sportsOutdoorsStrings[i];
+        //                 $('#id_sub_category').append(
+        //                     `
+        //                         <option value="${sub_category}">
+        //                             ${sub_category}
+        //                         </option>
+        //                         `
+        //                 );
+        //             }
 
 
-                }
-                else if (category == 'Farming & Industrial') {
-                    $('#id_sub_category').empty();
+        //         }
+        //         else if (category == 'Simulation') {
+        //             $('#id_sub_category').empty();
 
-                    var length = farmingIndustrialStrings.length;
-                    var i;
-                    for (i = 0; i < length; i++) {
-                        sub_category = farmingIndustrialStrings[i];
-                        $('#id_sub_category').append(
-                            `
-                                <option value="${sub_category}">
-                                    ${sub_category}
-                                </option>
-                                `
-                        );
-                    }
-
-
-                }
-                else if (category == 'Pets') {
-                    $('#id_sub_category').empty();
-
-                    var length = petsStrings.length;
-                    var i;
-                    for (i = 0; i < length; i++) {
-                        sub_category = petsStrings[i];
-                        $('#id_sub_category').append(
-                            `
-                                <option value="${sub_category}">
-                                    ${sub_category}
-                                </option>
-                                `
-                        );
-                    }
+        //             var length = propertyStrings.length;
+        //             var i;
+        //             for (i = 0; i < length; i++) {
+        //                 sub_category = propertyStrings[i];
+        //                 $('#id_sub_category').append(
+        //                     `
+        //                         <option value="${sub_category}">
+        //                             ${sub_category}
+        //                         </option>
+        //                         `
+        //                 );
+        //             }
 
 
-                }
-                else if (category == 'Jobs') {
-                    $('#id_sub_category').empty();
+        //         }
+        //         else if (category == 'Consoles') {
+        //             $('#id_sub_category').empty();
 
-                    var length = jobsStrings.length;
-                    var i;
-                    for (i = 0; i < length; i++) {
-                        sub_category = jobsStrings[i];
-                        $('#id_sub_category').append(
-                            `
-                                <option value="${sub_category}">
-                                    ${sub_category}
-                                </option>
-                                `
-                        );
-                    }
-
-
-                }
-                else {
-                    $('#id_sub_category').empty();
-                }
-
-            });
+        //             var length = fashionBeautyStrings.length;
+        //             var i;
+        //             for (i = 0; i < length; i++) {
+        //                 sub_category = fashionBeautyStrings[i];
+        //                 $('#id_sub_category').append(
+        //                     `
+        //                         <option value="${sub_category}">
+        //                             ${sub_category}
+        //                         </option>
+        //                         `
+        //                 );
+        //             }
 
 
-        });
+        //         }
+        //         else if (category == 'Accessories') {
+        //             $('#id_sub_category').empty();
+
+        //             var length = hobbiesInterestsStrings.length;
+        //             var i;
+        //             for (i = 0; i < length; i++) {
+        //                 sub_category = hobbiesInterestsStrings[i];
+        //                 $('#id_sub_category').append(
+        //                     `
+        //                         <option value="${sub_category}">
+        //                             ${sub_category}
+        //                         </option>
+        //                         `
+        //                 );
+        //             }
+
+
+        //         }
+        //         else if (category == 'Services') {
+        //             $('#id_sub_category').empty();
+
+        //             var length = servicesStrings.length;
+        //             var i;
+        //             for (i = 0; i < length; i++) {
+        //                 sub_category = servicesStrings[i];
+        //                 $('#id_sub_category').append(
+        //                     `
+        //                         <option value="${sub_category}">
+        //                             ${sub_category}
+        //                         </option>
+        //                         `
+        //                 );
+        //             }
+
+
+        //         }
+        //         else if (category == 'Open World') {
+        //             $('#id_sub_category').empty();
+
+        //             var length = kidsBabyStrings.length;
+        //             var i;
+        //             for (i = 0; i < length; i++) {
+        //                 sub_category = kidsBabyStrings[i];
+        //                 $('#id_sub_category').append(
+        //                     `
+        //                         <option value="${sub_category}">
+        //                             ${sub_category}
+        //                         </option>
+        //                         `
+        //                 );
+        //             }
+
+
+        //         }
+        //         else if (category == 'Farming & Industrial') {
+        //             $('#id_sub_category').empty();
+
+        //             var length = farmingIndustrialStrings.length;
+        //             var i;
+        //             for (i = 0; i < length; i++) {
+        //                 sub_category = farmingIndustrialStrings[i];
+        //                 $('#id_sub_category').append(
+        //                     `
+        //                         <option value="${sub_category}">
+        //                             ${sub_category}
+        //                         </option>
+        //                         `
+        //                 );
+        //             }
+
+
+        //         }
+        //         else if (category == 'Pets') {
+        //             $('#id_sub_category').empty();
+
+        //             var length = petsStrings.length;
+        //             var i;
+        //             for (i = 0; i < length; i++) {
+        //                 sub_category = petsStrings[i];
+        //                 $('#id_sub_category').append(
+        //                     `
+        //                         <option value="${sub_category}">
+        //                             ${sub_category}
+        //                         </option>
+        //                         `
+        //                 );
+        //             }
+
+
+        //         }
+        //         else if (category == 'Jobs') {
+        //             $('#id_sub_category').empty();
+
+        //             var length = jobsStrings.length;
+        //             var i;
+        //             for (i = 0; i < length; i++) {
+        //                 sub_category = jobsStrings[i];
+        //                 $('#id_sub_category').append(
+        //                     `
+        //                         <option value="${sub_category}">
+        //                             ${sub_category}
+        //                         </option>
+        //                         `
+        //                 );
+        //             }
+
+
+        //         }
+        //         else {
+        //             $('#id_sub_category').empty();
+        //         }
+
+        //     });
+
+
+        // });
 
 
 
