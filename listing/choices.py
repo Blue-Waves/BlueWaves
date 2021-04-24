@@ -1,6 +1,6 @@
 category_choices = {
-    'Electronics': 'Electronics',
-    'Property': 'Property',
+    'Action': 'Action',
+    'Simulation': 'Simulation',
     'Cars': 'Cars',
     'Furniture': 'Furniture',
     'Jobs': 'Jobs',
